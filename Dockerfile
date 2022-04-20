@@ -8,6 +8,8 @@ WORKDIR /build
 
 COPY main.go .
 
+RUN go env
+
 RUN go build -o test-goapp
 
 
