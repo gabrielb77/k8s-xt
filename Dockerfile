@@ -15,6 +15,6 @@ RUN go build -o test-goapp
 # ---
 FROM scratch AS run
 
-COPY --from=build /build/test-goapp /bin/
+COPY --from=gobuild /build/test-goapp /bin/
 
 CMD ["test-goapp"]
