@@ -3,6 +3,7 @@ package main
 import (
 	f "fmt"
 	"math/rand"
+	"os"
 )
 
 func main() {
