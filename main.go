@@ -4,6 +4,7 @@ import (
 	f "fmt"
 	"math/rand"
 	"os"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
