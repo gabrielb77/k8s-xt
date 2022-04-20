@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	f "fmt"
+	"math/rand"
 )
 
 func main() {

@@ -3,12 +3,13 @@ FROM golang:1.18.1-alpine3.15 as gobuild
 ENV GOOS=linux
 ENV GOARCH=amd64
 ENV CGO_ENABLED=0
+ENV GO111MODULE=auto
 
 WORKDIR /build
 
 COPY main.go .
 
-RUN go env -w GO111MODULE=auto
+#RUN go env -w GO111MODULE=auto
 RUN go build -o test-goapp
 
 
