@@ -14,7 +14,7 @@ stat /var/run/crio/crio.sock &>/dev/null && echo "crio ok"
 
 #3
 
-apt-get update && apt-get install -y apt-transport-https ca-certificates curl ethtool socat conntrack
+apt-get update && apt-get install -y apt-transport-https ca-certificates curl ethtool socat conntrack chrony
 
 #4 - get last cni
 
