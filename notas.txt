@@ -1,4 +1,4 @@
-#1
+#1 - add sysctl options
 
 cat <<EOF | tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
@@ -6,7 +6,7 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
 
-#2
+#2 - check
 
 stat /var/run/dockershim.sock &>/dev/null && echo "shim ok"
 stat /run/containerd/containerd.sock &>/dev/null && echo "containerd ok"
@@ -14,18 +14,15 @@ stat /var/run/crio/crio.sock &>/dev/null && echo "crio ok"
 
 #3
 
-apt-get install -y apt-transport-https ca-certificates curl ethtool socat conntrack
+apt-get update && apt-get install -y apt-transport-https ca-certificates curl ethtool socat conntrack
 
-#4
-curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+#4 - get last cni
 
-#5
 CNI_VERSION="v1.1.1"
 mkdir -p /opt/cni/bin
 curl -L "https://github.com/containernetworking/plugins/releases/download/${CNI_VERSION}/cni-plugins-linux-amd64-${CNI_VERSION}.tgz" | tar -C /opt/cni/bin -xz
 
-
-#6
+#5 - download adm/let/ctl
 
 MyDir=$(pwd)
 DOWNLOAD_DIR=/usr/local/bin
@@ -41,32 +38,26 @@ curl -sSL "https://raw.githubusercontent.com/kubernetes/release/master/cmd/kubep
 mkdir -p /etc/systemd/system/kubelet.service.d
 curl -sSL "https://raw.githubusercontent.com/kubernetes/release/master/cmd/kubepkg/templates/latest/deb/kubeadm/10-kubeadm.conf" | sed "s:/usr/bin:${DOWNLOAD_DIR}:g" | tee /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
-
 cd ${MyDir}
 
 systemctl enable --now kubelet
 
-#7 network add-on calico
+#6 - network add-on calico
 
 curl https://projectcalico.docs.tigera.io/manifests/calico-typha.yaml -o calico.yaml
 
-#8 add /etc/hosts
+#7 - add nodes to /etc/hosts
 
 ### k8s
 192.168.0.150 k8s-nodo01 control-plane-endpoint
 192.168.0.151 k8s-nodo02
 192.168.0.152 k8s-nodo03
 
-
-#8
+#8 - create cluster
 
 kubeadm init --pod-network-cidr=10.10.0.0/16 --control-plane-endpoint=control-plane-endpoint --upload-certs
 
-
-
-
-
-#9
+#9 - output
 
 root@k8s-nodo01:~# kubeadm init --pod-network-cidr=10.10.0.0/16 --control-plane-endpoint=control-plane-endpoint --upload-certs
 [init] Using Kubernetes version: v1.23.5
@@ -156,7 +147,8 @@ kubeadm join control-plane-endpoint:6443 --token wuka89.zukjw5zlihxzcwxl \
 
 
 
-#10
+#10 - set up kubectl client
+
 Adminuser=k8s
 useradd -m -s /bin/bash ${Adminuser}
 mkdir -p /home/${Adminuser}/.kube
@@ -164,7 +156,7 @@ cp /etc/kubernetes/admin.conf /home/${Adminuser}/.kube/config
 chown -R ${Adminuser} /home/${Adminuser}/.kube
 
 
-#11 network add-on calico
+#11 - deploy network add-on calico
 
 curl https://projectcalico.docs.tigera.io/manifests/calico-typha.yaml -o /home/${Adminuser}/calico.yaml
 # Cambiar valor de CALICO_IPV4POOL_CIDR con pod-network-cidr
@@ -172,16 +164,14 @@ curl https://projectcalico.docs.tigera.io/manifests/calico-typha.yaml -o /home/$
 sudo -u ${Adminuser} kubectl apply -f calico.yaml
 
 
-
-#12
+#12 - taint cluster nodes as workers (this is a lab)
 
 sudo -u ${Adminuser} kubectl taint nodes --all node-role.kubernetes.io/master-
 
-
-
-#13
+#13 - join other nodes
 
 kubeadm join control-plane-endpoint:6443 --token wuka89.zukjw5zlihxzcwxl --discovery-token-ca-cert-hash sha256:dfc25fae4b07eee25530d0021f154bd5082281f048453350986461c996d931f4 --control-plane --certificate-key 1643258e8b24fb73826cb8b90685046b084dd96963162e3b38107c942fa35070
+
 
 
 # Cleanup
