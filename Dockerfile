@@ -8,6 +8,7 @@ WORKDIR /build
 
 COPY main.go .
 
+RUN go env -w GO111MODULE=auto
 RUN go env
 
 RUN go build -o test-goapp
