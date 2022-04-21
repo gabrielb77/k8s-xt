@@ -14,7 +14,7 @@ RUN ls -lR pkg
 RUN go env
 # n
 #RUN go get github.com/sirupsen/logrus
-RUN go get github.com/slackhq/simple-kubernetes-webhook/pkg/admission
+#RUN go get github.com/slackhq/simple-kubernetes-webhook/pkg/admission
 
 RUN go build -o test-goapp .
 
