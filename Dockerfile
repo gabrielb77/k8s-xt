@@ -10,7 +10,7 @@ WORKDIR /build
 
 COPY . .
 
-RUN ls -lR pkg
+RUN ls -lR
 RUN go env
 # n
 #RUN go get github.com/sirupsen/logrus

@@ -13,7 +13,7 @@ import (
 	admissionv1 "k8s.io/api/admission/v1"
 )
 
-var Info *log.Logger
+var Infol *log.Logger
 var Error *log.Logger
 
 func gbecho(w http.ResponseWriter, req *http.Request) {
@@ -37,8 +37,8 @@ func headers(w http.ResponseWriter, req *http.Request) {
 func health(w http.ResponseWriter, r *http.Request) {
 	/*	logrus.WithField("uri", r.RequestURI).Debug("healthy") */
 	f.Fprint(w, "OK")
-	Info = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
-	Info.Println("STD OUT Special Information")
+	Infol = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
+	Infol.Println("STD OUT Special Information")
 	Error = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
 	Error.Println("STD ERR")
 }
@@ -72,10 +72,10 @@ func parseRequest(r http.Request) (*admissionv1.AdmissionReview, error) {
 }
 
 func ValidatePods(w http.ResponseWriter, r *http.Request) {
-	Info = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime)
+	Infol = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime)
 	Error = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime)
-	Info.Println(r.RequestURI)
-	Info.Println("received validation request")
+	Infol.Println(r.RequestURI)
+	Infol.Println("received validation request")
 
 	in, err := parseRequest(*r)
 	if err != nil {
@@ -85,7 +85,7 @@ func ValidatePods(w http.ResponseWriter, r *http.Request) {
 	}
 
 	adm := admission.Admitter{
-		Logger:  Info,
+		Logger:  Infol,
 		Request: in.Request,
 	}
 
@@ -106,8 +106,8 @@ func ValidatePods(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	Info.Println("sending response")
-	Info.Println("%s", jout)
+	Infol.Println("sending response")
+	Infol.Println("%s", jout)
 	f.Fprintf(w, "%s", jout)
 }
 
