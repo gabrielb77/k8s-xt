@@ -1,11 +1,16 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	f "fmt"
 	"log"
 	"math/rand"
 	"net/http"
 	"os"
+
+	"github.com/slackhq/simple-kubernetes-webhook/pkg/admission"
+	admissionv1 "k8s.io/api/admission/v1"
 )
 
 var Info *log.Logger
@@ -38,27 +43,56 @@ func health(w http.ResponseWriter, r *http.Request) {
 	Error.Println("STD ERR")
 }
 
-/*
+// parseRequest extracts an AdmissionReview from an http.Request if possible
+func parseRequest(r http.Request) (*admissionv1.AdmissionReview, error) {
+	if r.Header.Get("Content-Type") != "application/json" {
+		return nil, f.Errorf("Content-Type: %q should be %q",
+			r.Header.Get("Content-Type"), "application/json")
+	}
+
+	bodybuf := new(bytes.Buffer)
+	bodybuf.ReadFrom(r.Body)
+	body := bodybuf.Bytes()
+
+	if len(body) == 0 {
+		return nil, f.Errorf("admission request body is empty")
+	}
+
+	var a admissionv1.AdmissionReview
+
+	if err := json.Unmarshal(body, &a); err != nil {
+		return nil, f.Errorf("could not parse admission review request: %v", err)
+	}
+
+	if a.Request == nil {
+		return nil, f.Errorf("admission review can't be used: Request field is nil")
+	}
+
+	return &a, nil
+}
+
 func ValidatePods(w http.ResponseWriter, r *http.Request) {
-	logger := logrus.WithField("uri", r.RequestURI)
-	logger.Debug("received validation request")
+	Info = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime)
+	Error = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime)
+	Info.Println(r.RequestURI)
+	Info.Println("received validation request")
 
 	in, err := parseRequest(*r)
 	if err != nil {
-		logger.Error(err)
+		Error.Println(err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
 	adm := admission.Admitter{
-		Logger:  logger,
+		Logger:  Info,
 		Request: in.Request,
 	}
 
 	out, err := adm.ValidatePodReview()
 	if err != nil {
-		e := fmt.Sprintf("could not generate admission response: %v", err)
-		logger.Error(e)
+		e := f.Sprintf("could not generate admission response: %v", err)
+		Error.Println(e)
 		http.Error(w, e, http.StatusInternalServerError)
 		return
 	}
@@ -66,17 +100,16 @@ func ValidatePods(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	jout, err := json.Marshal(out)
 	if err != nil {
-		e := fmt.Sprintf("could not parse admission response: %v", err)
-		logger.Error(e)
+		e := f.Sprintf("could not parse admission response: %v", err)
+		Error.Println(e)
 		http.Error(w, e, http.StatusInternalServerError)
 		return
 	}
 
-	logger.Debug("sending response")
-	logger.Debugf("%s", jout)
-	fmt.Fprintf(w, "%s", jout)
+	Info.Println("sending response")
+	Info.Println("%s", jout)
+	f.Fprintf(w, "%s", jout)
 }
-*/
 
 func main() {
 	for i := 0; i < 10; i++ {
