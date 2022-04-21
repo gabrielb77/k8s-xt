@@ -7,8 +7,9 @@ ENV GO111MODULE=auto
 
 WORKDIR /build
 
-COPY main.go .
+COPY . .
 
+# n
 #RUN go get github.com/sirupsen/logrus
 RUN go build -o test-goapp .
 
