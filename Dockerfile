@@ -9,6 +9,7 @@ WORKDIR /build
 
 COPY main.go .
 
+RUN go get github.com/sirupsen/logrus
 RUN go build -o test-goapp .
 
 
