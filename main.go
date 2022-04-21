@@ -9,6 +9,8 @@ import (
 	"net/http"
 	"os"
 
+	"rsc.io/quote"
+
 	"github.com/slackhq/simple-kubernetes-webhook/pkg/admission"
 	admissionv1 "k8s.io/api/admission/v1"
 )
@@ -116,6 +118,7 @@ func main() {
 		f.Printf("%d) %d\n", i, rand.Intn(25))
 	}
 
+	f.Println(quote.Go())
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
 	http.HandleFunc("/gb", gbecho)
