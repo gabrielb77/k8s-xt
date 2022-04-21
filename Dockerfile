@@ -10,6 +10,7 @@ WORKDIR /build
 COPY . .
 
 RUN ls -l
+RUN go env
 # n
 #RUN go get github.com/sirupsen/logrus
 RUN go build -o test-goapp .
