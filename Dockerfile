@@ -10,7 +10,7 @@ WORKDIR /build
 
 COPY . .
 
-RUN ls -lR
+RUN ls -lh /go/src/github.com/slackhq/simple-kubernetes-webhook/pkg/admission
 RUN go env
 # n
 #RUN go get github.com/sirupsen/logrus
