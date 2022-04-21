@@ -4,13 +4,13 @@ ENV GOOS=linux
 ENV GOARCH=amd64
 ENV CGO_ENABLED=0
 ENV GO111MODULE=auto
-ENV GOPATH=/go
+#ENV GOPATH=/go
 
 WORKDIR /build
 
 COPY . .
 
-RUN ls -lh /go/src/github.com/slackhq/simple-kubernetes-webhook/pkg/admission
+#RUN ls -lh /go/src/github.com/slackhq/simple-kubernetes-webhook/pkg/admission
 RUN go env
 # n
 #RUN go get github.com/sirupsen/logrus
