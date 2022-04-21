@@ -9,7 +9,7 @@ WORKDIR /build
 
 COPY main.go .
 
-RUN go build -o test-goapp
+RUN go build -o test-goapp .
 
 
 # ---
