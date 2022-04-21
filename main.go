@@ -37,8 +37,10 @@ func health(w http.ResponseWriter, r *http.Request) {
 	log.Println("health out")
 	f.Fprint(w, "OK")
 	Info = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
+	Info.SetOutput(os.Stdout)
 	Info.Println("STD OUT Special Information")
 	Error = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
+	Error.SetOutput(os.Stderr)
 	Error.Println("STD ERR")
 }
 
