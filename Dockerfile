@@ -12,7 +12,7 @@ COPY . .
 
 #RUN ls -lh /go/src/github.com/slackhq/simple-kubernetes-webhook/pkg/admission
 RUN go env
-RUN go mod tidy
+#RUN go mod tidy
 #RUN go get github.com/sirupsen/logrus
 #RUN go get github.com/slackhq/simple-kubernetes-webhook/pkg/admission#
 #RUN go get
