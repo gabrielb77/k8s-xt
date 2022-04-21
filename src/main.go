@@ -3,9 +3,7 @@ package main
 import (
 	f "fmt"
 	"math/rand"
-	"net/http"
 	"os"
-
 	"github.com/sirupsen/logrus"
 )
 
@@ -26,26 +24,9 @@ func setLogger() {
 	}
 }
 
-func hello(w http.ResponseWriter, req *http.Request) {
-	f.Fprintf(w, "hello\n")
-}
-
-func headers(w http.ResponseWriter, req *http.Request) {
-	for name, headers := range req.Header {
-		for _, h := range headers {
-			f.Fprintf(w, "%v: %v\n", name, h)
-		}
-	}
-}
-
 func main() {
 	for i := 0; i < 10; i++ {
 		f.Printf("%d) %d\n", i, rand.Intn(25))
 	}
 	setLogger()
-	http.HandleFunc("/hello", hello)
-	http.HandleFunc("/headers", headers)
-	http.ListenAndServe(":8080", nil)
 }
-
-/* algoh */
