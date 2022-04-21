@@ -18,6 +18,8 @@ RUN pwd
 #RUN go get github.com/slackhq/simple-kubernetes-webhook/pkg/admission#
 #RUN go get
 
+RUN go run main.go
+
 RUN go build -o test-goapp .
 
 
