@@ -42,7 +42,7 @@ func main() {
 	for i := 0; i < 10; i++ {
 		f.Printf("%d) %d\n", i, rand.Intn(25))
 	}
-	setLogger()
+	/*	setLogger() */
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
 	http.ListenAndServe(":8080", nil)
