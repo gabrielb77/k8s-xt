@@ -16,7 +16,7 @@ RUN pwd
 #RUN go mod tidy
 #RUN go get github.com/sirupsen/logrus
 #RUN go get github.com/slackhq/simple-kubernetes-webhook/pkg/admission#
-#RUN go get
+RUN go get
 
 RUN go build -o test-goapp .
 
