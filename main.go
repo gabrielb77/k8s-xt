@@ -8,6 +8,9 @@ import (
 	"os"
 )
 
+var Info *log.Logger
+var Error *log.Logger
+
 func gbecho(w http.ResponseWriter, req *http.Request) {
 	for k, v := range req.Header {
 		f.Printf("k: %v - v: %v", k, v)
@@ -33,6 +36,10 @@ func health(w http.ResponseWriter, r *http.Request) {
 	log.SetOutput(os.Stdout)
 	log.Println("health out")
 	f.Fprint(w, "OK")
+	Info = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
+	Info.Println("STD OUT Special Information")
+	Error = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
+	Error.Println("STD ERR")
 }
 
 /*
