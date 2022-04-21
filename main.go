@@ -2,29 +2,10 @@ package main
 
 import (
 	f "fmt"
+	"log"
 	"math/rand"
 	"net/http"
-	"os"
-
-	"github.com/sirupsen/logrus"
 )
-
-func setLogger() {
-	logrus.SetLevel(logrus.DebugLevel)
-
-	lev := os.Getenv("LOG_LEVEL")
-	if lev != "" {
-		llev, err := logrus.ParseLevel(lev)
-		if err != nil {
-			logrus.Fatalf("cannot set LOG_LEVEL to %q", lev)
-		}
-		logrus.SetLevel(llev)
-	}
-
-	if os.Getenv("LOG_JSON") == "true" {
-		logrus.SetFormatter(&logrus.JSONFormatter{})
-	}
-}
 
 func gbecho(w http.ResponseWriter, req *http.Request) {
 	for k, v := range req.Header {
@@ -44,14 +25,22 @@ func headers(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func health(w http.ResponseWriter, r *http.Request) {
+	/*	logrus.WithField("uri", r.RequestURI).Debug("healthy") */
+	log.Prefix()
+	log.Println("health")
+	f.Fprint(w, "OK")
+}
+
 func main() {
 	for i := 0; i < 10; i++ {
 		f.Printf("%d) %d\n", i, rand.Intn(25))
 	}
-	/*	setLogger() */
+
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
 	http.HandleFunc("/gb", gbecho)
+	http.HandleFunc("/health", health)
 	http.ListenAndServe(":8080", nil)
 }
 
