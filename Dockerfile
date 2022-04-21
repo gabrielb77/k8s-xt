@@ -10,7 +10,7 @@ ENV GO111MODULE=auto
 
 COPY . .
 
-#RUN ls -lh /go/src/github.com/slackhq/simple-kubernetes-webhook/pkg/admission
+RUN ls -lh /go/src/github.com
 RUN go env
 RUN pwd
 #RUN go mod tidy
