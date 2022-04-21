@@ -29,7 +29,9 @@ func headers(w http.ResponseWriter, req *http.Request) {
 func health(w http.ResponseWriter, r *http.Request) {
 	/*	logrus.WithField("uri", r.RequestURI).Debug("healthy") */
 	log.SetOutput(os.Stderr)
-	log.Println("health")
+	log.Println("health err")
+	log.SetOutput(os.Stdout)
+	log.Println("health out")
 	f.Fprint(w, "OK")
 }
 
