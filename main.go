@@ -26,6 +26,12 @@ func setLogger() {
 	}
 }
 
+func gbecho(w http.ResponseWriter, req *http.Request) {
+	for k, v := range req.Header {
+		f.Printf("k: %v - v: %v", k, v)
+	}
+}
+
 func hello(w http.ResponseWriter, req *http.Request) {
 	f.Fprintf(w, "hello\n")
 }
@@ -45,6 +51,7 @@ func main() {
 	/*	setLogger() */
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
+	http.HandleFunc("/gb", gbecho)
 	http.ListenAndServe(":8080", nil)
 }
 
