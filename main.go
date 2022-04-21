@@ -5,6 +5,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
 )
 
 func gbecho(w http.ResponseWriter, req *http.Request) {
@@ -27,10 +28,50 @@ func headers(w http.ResponseWriter, req *http.Request) {
 
 func health(w http.ResponseWriter, r *http.Request) {
 	/*	logrus.WithField("uri", r.RequestURI).Debug("healthy") */
-	log.Prefix("lala ")
+	log.SetOutput(os.Stderr)
 	log.Println("health")
 	f.Fprint(w, "OK")
 }
+
+/*
+func ValidatePods(w http.ResponseWriter, r *http.Request) {
+	logger := logrus.WithField("uri", r.RequestURI)
+	logger.Debug("received validation request")
+
+	in, err := parseRequest(*r)
+	if err != nil {
+		logger.Error(err)
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	adm := admission.Admitter{
+		Logger:  logger,
+		Request: in.Request,
+	}
+
+	out, err := adm.ValidatePodReview()
+	if err != nil {
+		e := fmt.Sprintf("could not generate admission response: %v", err)
+		logger.Error(e)
+		http.Error(w, e, http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	jout, err := json.Marshal(out)
+	if err != nil {
+		e := fmt.Sprintf("could not parse admission response: %v", err)
+		logger.Error(e)
+		http.Error(w, e, http.StatusInternalServerError)
+		return
+	}
+
+	logger.Debug("sending response")
+	logger.Debugf("%s", jout)
+	fmt.Fprintf(w, "%s", jout)
+}
+*/
 
 func main() {
 	for i := 0; i < 10; i++ {
