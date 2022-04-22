@@ -15,7 +15,8 @@ COPY . .
 RUN go env
 RUN go get
 RUN ls -l
-RUN go build -o goapp main.go
+RUN go build
+# -o goapp main.go
 
 
 FROM scratch
