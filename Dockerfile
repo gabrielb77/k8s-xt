@@ -17,8 +17,8 @@ COPY . .
 #RUN ls -l /go/testdir/github.com/gorilla/mux/
 #RUN ls -l /go/testdir/github.com/gorilla/mux/go.mod
 RUN go env
-RUN pwd
-RUN go get
+#RUN pwd
+#RUN go get
 # github.com/gorilla/mux
 #RUN go mod tidy
 #RUN go get github.com/sirupsen/logrus
