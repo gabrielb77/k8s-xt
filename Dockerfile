@@ -12,6 +12,8 @@ ENV BINNAME="app"
 
 COPY . .
 
+RUN type go
+RUN go version
 RUN pwd
 RUN ls -lR
 #RUN go env
