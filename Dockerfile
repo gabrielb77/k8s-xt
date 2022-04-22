@@ -27,6 +27,6 @@ RUN ls -lR
 FROM scratch
 ENV BINNAME="app"
 
-COPY --from=gobuild ${BINNAME} /bin/
+COPY --from=gobuild /go/${BINNAME} /bin/
 
 CMD ["${BINNAME}"]
