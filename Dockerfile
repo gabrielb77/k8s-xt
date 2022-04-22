@@ -17,7 +17,7 @@ RUN go version
 RUN pwd
 RUN ls -lR
 #RUN go env
-RUN go get
+#RUN go get
 RUN ls -l bin
 
 RUN go build -o miapp main.go
