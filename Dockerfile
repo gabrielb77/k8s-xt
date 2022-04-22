@@ -17,7 +17,7 @@ ENV GO111MODULE=auto
 COPY . .
 
 #RUN go env
-RUN go get github.com/gorilla/mux
+#RUN go get github.com/gorilla/mux
 RUN go get github.com/gin-gonic/gin
 RUN go build -o ${BINNAME} main.go
 
