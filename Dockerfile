@@ -8,13 +8,13 @@ ENV GO111MODULE=auto
 
 #WORKDIR /build
 
-RUN ls -lh
+#RUN ls -lh
 
 COPY . .
 
-RUN ls -lh
-RUN go env
-RUN pwd
+#RUN ls -lh
+#RUN go env
+#RUN pwd
 #RUN go mod tidy
 #RUN go get github.com/sirupsen/logrus
 #RUN go get github.com/slackhq/simple-kubernetes-webhook/pkg/admission#
