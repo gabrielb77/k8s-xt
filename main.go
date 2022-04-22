@@ -9,10 +9,10 @@ import (
 )
 
 func gbecho(c *gin.Context) {
-	for k, v := range req.Header {
+	/*	for k, v := range req.Header {
 		fmt.Fprintf(w, "k: %v - v: %v\n", k, v)
 		log.Println("Hello world!")
-	}
+	} */
 	log.Println("Hello world! 2")
 	fmt.Fprintln(w, "Hola 2")
 }
