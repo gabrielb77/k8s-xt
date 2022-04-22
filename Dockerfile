@@ -13,8 +13,8 @@ ENV GO111MODULE=auto
 COPY . .
 
 #RUN ls -lh /go/src/github.com/gorilla/mux
-RUN ls -l /go/testdir/github.com/gorilla/mux/
-RUN ls -l /go/testdir/github.com/gorilla/mux/go.mod
+#RUN ls -l /go/testdir/github.com/gorilla/mux/
+#RUN ls -l /go/testdir/github.com/gorilla/mux/go.mod
 RUN go env
 RUN pwd
 RUN go get
