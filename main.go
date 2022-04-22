@@ -53,7 +53,6 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/gb2/{id}", gbecho2)
-
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
 	http.HandleFunc("/gb", gbecho)
