@@ -58,5 +58,5 @@ func main() {
 	http.HandleFunc("/health", health)
 	/*	http.HandleFunc("/validate-pods", ServeValidatePods) */
 	/*	http.HandleFunc("/mutate-pods", ServeMutatePods) */
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", r)
 }
