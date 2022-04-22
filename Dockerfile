@@ -22,4 +22,4 @@ ENV BINNAME="app"
 
 COPY --from=gobuild /go/${BINNAME} /bin/
 
-CMD ["${BINNAME}"]
+CMD ["sh", "-c", "${BINNAME}"]
