@@ -12,7 +12,7 @@ ENV GO111MODULE=auto
 
 COPY . .
 
-RUN ls -lh
+RUN ls -lh src
 RUN go env
 RUN pwd
 #RUN go mod tidy
