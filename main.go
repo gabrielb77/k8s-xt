@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 )
@@ -9,6 +10,7 @@ import (
 func gbecho(w http.ResponseWriter, req *http.Request) {
 	for k, v := range req.Header {
 		fmt.Printf("k: %v - v: %v", k, v)
+		log.Println("Hello world!")
 	}
 }
 
