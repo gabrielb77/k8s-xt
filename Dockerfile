@@ -1,4 +1,5 @@
-FROM golang:1.18.1-alpine3.15 as gobuild
+#FROM golang:1.18.1-alpine3.15 as gobuild
+FROM golang:bullseye as gobuild
 
 ENV GOOS=linux
 ENV GOARCH=amd64
@@ -18,7 +19,7 @@ COPY . .
 #RUN ls -l /go/testdir/github.com/gorilla/mux/go.mod
 RUN go env
 #RUN pwd
-#RUN go get
+RUN go get
 # github.com/gorilla/mux
 #RUN go mod tidy
 #RUN go get github.com/sirupsen/logrus
