@@ -13,7 +13,7 @@ ENV GO111MODULE=auto
 COPY . .
 
 #RUN ls -lh
-#RUN go env
+RUN go env
 #RUN pwd
 #RUN go mod tidy
 #RUN go get github.com/sirupsen/logrus
