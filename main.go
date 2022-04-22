@@ -24,7 +24,7 @@ func gbecho2(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		fmt.Println(w, "id is missing in parameters")
 	}
-	fmt.Println(w, "id := ", id)
+	fmt.Fprintln(w, "id := ", id)
 	//call http://localhost:8080/provisions/someId in your browser
 	//Output : id := someId
 }
