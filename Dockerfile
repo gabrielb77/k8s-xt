@@ -17,14 +17,12 @@ RUN go get
 RUN ls -l
 #RUN go run main.go
 
-#RUN go build -n main.go
-
-RUN go build -o goapp main.go
+RUN go build -o ${BINNAME} main.go
 
 
 FROM scratch
 ENV BINNAME="app"
 
-COPY --from=gobuildNO /go/${BINNAME} /bin/
+COPY --from=gobuild /go/${BINNAME} /bin/
 
-CMD ["/go/${BINNAME}"]
+CMD ["${BINNAME}"]
