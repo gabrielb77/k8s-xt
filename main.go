@@ -4,12 +4,11 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-func gbecho(w http.ResponseWriter, req *http.Request) {
+func gbecho(c *gin.Context) {
 	for k, v := range req.Header {
 		fmt.Fprintf(w, "k: %v - v: %v\n", k, v)
 		log.Println("Hello world!")
