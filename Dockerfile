@@ -1,4 +1,3 @@
-#FROM golang:1.18.1-alpine3.15 as gobuild
 FROM golang:bullseye as gobuild
 
 ENV GOOS=linux
@@ -18,8 +17,7 @@ RUN go get
 RUN go build -o ${BINNAME} .
 
 
-# ---
-FROM scratch AS run
+FROM scratch
 ENV BINNAME="app"
 
 COPY --from=gobuild /go/${BINNAME} /bin/
