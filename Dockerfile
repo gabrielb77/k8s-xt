@@ -14,12 +14,12 @@ COPY . .
 
 RUN go env
 RUN go get
-RUN ls -l
+RUN ls -l bin
 #RUN go run main.go
 
 RUN go build -o ${BINNAME} main.go
 
-RUN ls -l
+RUN ls -l bin
 
 FROM scratch
 ENV BINNAME="app"
