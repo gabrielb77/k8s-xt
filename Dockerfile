@@ -12,17 +12,10 @@ ENV BINNAME="app"
 
 COPY . .
 
-RUN type go
-RUN go version
-RUN pwd
-RUN ls -lR
 #RUN go env
 RUN go get github.com/gorilla/mux
-RUN ls -l bin
-
 RUN go build -o ${BINNAME} main.go
 
-RUN ls -lR
 
 FROM scratch
 ENV BINNAME="app"
