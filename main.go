@@ -22,9 +22,9 @@ func gbecho2(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, ok := vars["id"]
 	if !ok {
-		fmt.Println("id is missing in parameters")
+		fmt.Println(w, "id is missing in parameters")
 	}
-	fmt.Println("id := ", id)
+	fmt.Println(w, "id := ", id)
 	//call http://localhost:8080/provisions/someId in your browser
 	//Output : id := someId
 }
