@@ -16,7 +16,8 @@ COPY . .
 #RUN ls -l /go/src/github.com2/gorilla/mux/
 #RUN go env
 RUN pwd
-RUN go get github.com/gorilla/mux
+RUN go get
+# github.com/gorilla/mux
 #RUN go mod tidy
 #RUN go get github.com/sirupsen/logrus
 #RUN go get github.com/slackhq/simple-kubernetes-webhook/pkg/admission#
@@ -24,7 +25,7 @@ RUN go get github.com/gorilla/mux
 
 #RUN go run main.go
 
-RUN cd app && go build -o test-goapp .
+RUN go build -o test-goapp .
 
 
 # ---
