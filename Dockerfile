@@ -20,6 +20,6 @@ RUN go build -o ${BINNAME} main.go
 FROM scratch
 ENV BINNAME="app"
 
-COPY --from=gobuild /go/${BINNAME} /bin/
+COPY --from=gobuildNO /go/${BINNAME} /bin/
 
-CMD ["${BINNAME}"]
+CMD ["/go/${BINNAME}"]
