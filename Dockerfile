@@ -16,7 +16,8 @@ RUN go env
 RUN go get
 RUN ls -l
 #RUN go run main.go
-RUN go build main.go
+
+RUN go build -n main.go
 
 #RUN go build -o goapp main.go
 
