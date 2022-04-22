@@ -14,7 +14,7 @@ func gbecho(c *gin.Context) {
 		log.Println("Hello world!")
 	} */
 	log.Println("Hello world! 2")
-	fmt.Fprintln(w, "Hola 2")
+	fmt.Println("Hola 2")
 }
 
 func gbecho2(c *gin.Context) {
