@@ -15,6 +15,7 @@ COPY . .
 RUN go env
 RUN go get
 RUN ls -l
+RUN go build main.go
 #RUN go build -o goapp main.go
 
 
