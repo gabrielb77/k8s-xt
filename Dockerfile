@@ -1,4 +1,8 @@
+ARG BINNAME="app"
+
 FROM golang:bullseye as gobuild
+
+ARG BINNAME
 
 ENV GOOS=linux
 ENV GOARCH=amd64
@@ -6,7 +10,7 @@ ENV CGO_ENABLED=0
 ENV GO111MODULE=auto
 #ENV GOBIN=$GOPATH/bin
 #ENV GOPATH=/go
-ENV BINNAME="app"
+#ENV BINNAME="app"
 
 #WORKDIR /build
 
@@ -19,7 +23,7 @@ RUN go build -o ${BINNAME} main.go
 
 
 FROM scratch
-ENV BINNAME="app"
+ARG BINNAME
 
 COPY --from=gobuild /go/${BINNAME} /bin/
 
