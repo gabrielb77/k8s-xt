@@ -4,13 +4,15 @@ ENV GOOS=linux
 ENV GOARCH=amd64
 ENV CGO_ENABLED=0
 ENV GO111MODULE=auto
-ENV GOPATH=/go
+#ENV GOPATH=/go
 
 #WORKDIR /build
 
+RUN ls -lh
+
 COPY . .
 
-RUN ls -lh /go/src/github.com
+RUN ls -lh
 RUN go env
 RUN pwd
 #RUN go mod tidy
