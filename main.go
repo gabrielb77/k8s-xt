@@ -9,7 +9,7 @@ import (
 
 func gbecho(w http.ResponseWriter, req *http.Request) {
 	for k, v := range req.Header {
-		fmt.Printf("k: %v - v: %v", k, v)
+		fmt.Fprintf(w, "k: %v - v: %v\n", k, v)
 		log.Println(w, "Hello world!")
 	}
 	log.Println("Hello world! 2")
