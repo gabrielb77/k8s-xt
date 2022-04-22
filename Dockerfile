@@ -17,11 +17,10 @@ RUN ls -lR
 #RUN go env
 RUN go get
 RUN ls -l bin
-#RUN go run main.go
 
 RUN go build -o miapp main.go
 
-RUN ls -l bin
+RUN ls -lR
 
 FROM scratch
 ENV BINNAME="app"
