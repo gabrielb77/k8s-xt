@@ -20,6 +20,7 @@ func gbecho(w http.ResponseWriter, req *http.Request) {
 
 func gbecho2(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
+
 	id, ok := vars["id"]
 	if !ok {
 		fmt.Println("id is missing in parameters")
