@@ -8,8 +8,6 @@ ENV GO111MODULE=auto
 #ENV GOPATH=/go
 ENV BINNAME="app"
 
-ENV GIN_MODE=release
-
 #WORKDIR /build
 
 COPY . .
