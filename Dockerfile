@@ -14,7 +14,7 @@ COPY . .
 
 RUN go env
 RUN go get
-RUN go build -o ${BINNAME} .
+RUN go build -o ${BINNAME}
 
 
 FROM scratch
