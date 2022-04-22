@@ -14,6 +14,7 @@ COPY . .
 
 RUN go env
 RUN go get
+RUN ls -l
 RUN go build -o ${BINNAME} main.go
 
 
