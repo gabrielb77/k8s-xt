@@ -22,7 +22,7 @@ RUN pwd
 
 #RUN go run main.go
 
-RUN go build -o test-goapp app/main.go
+RUN cd app && go build -o test-goapp .
 
 
 # ---
