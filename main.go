@@ -13,7 +13,7 @@ func gbecho(w http.ResponseWriter, req *http.Request) {
 		log.Println(w, "Hello world!")
 	}
 	log.Println(w, "Hello world! 2")
-	fmt.Println(w, "Hola 2")
+	fmt.Fprint(w, "Hola 2")
 }
 
 func hello(w http.ResponseWriter, req *http.Request) {
