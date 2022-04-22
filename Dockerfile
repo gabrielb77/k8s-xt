@@ -12,7 +12,9 @@ ENV BINNAME="app"
 
 COPY . .
 
-RUN go env
+RUN pwd
+RUN ls -lR
+#RUN go env
 RUN go get
 RUN ls -l bin
 #RUN go run main.go
