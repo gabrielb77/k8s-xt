@@ -20,7 +20,7 @@ RUN ls -lR
 #RUN go get
 RUN ls -l bin
 
-RUN go build -o miapp main.go
+RUN go build -o ${BINNAME} main.go
 
 RUN ls -lR
 
