@@ -14,7 +14,7 @@ COPY . .
 
 #RUN ls -lh /go/src/github.com/gorilla/mux
 #RUN ls -l /go/src/github.com2/gorilla/mux/
-#RUN go env
+RUN go env
 RUN pwd
 RUN go get
 # github.com/gorilla/mux
