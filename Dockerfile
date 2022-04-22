@@ -19,6 +19,7 @@ RUN ls -l
 
 RUN go build -o ${BINNAME} main.go
 
+RUN ls -l
 
 FROM scratch
 ENV BINNAME="app"
