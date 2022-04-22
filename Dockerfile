@@ -12,7 +12,7 @@ ENV GO111MODULE=auto
 
 COPY . .
 
-RUN ls -lh src
+RUN ls -lh /go/src/github.com/gorilla/mux
 RUN go env
 RUN pwd
 #RUN go mod tidy
