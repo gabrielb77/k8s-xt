@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/gorilla/mux"
 )
 
@@ -50,13 +51,21 @@ func main() {
 		fmt.Printf("%d) %d\n", i, rand.Intn(25))
 	}
 
-	r := mux.NewRouter()
-	r.HandleFunc("/gb2/{id}", gbecho2)
-	http.HandleFunc("/hello", hello)
-	http.HandleFunc("/headers", headers)
-	http.HandleFunc("/gb", gbecho)
-	http.HandleFunc("/health", health)
+	/*	r := mux.NewRouter()
+		r.HandleFunc("/gb2/{id}", gbecho2)
+		http.HandleFunc("/hello", hello)
+		http.HandleFunc("/headers", headers)
+		http.HandleFunc("/gb", gbecho)
+		http.HandleFunc("/health", health) */
 	/*	http.HandleFunc("/validate-pods", ServeValidatePods) */
 	/*	http.HandleFunc("/mutate-pods", ServeMutatePods) */
-	http.ListenAndServe(":8080", r)
+	/*	http.ListenAndServe(":8080", r) */
+
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
