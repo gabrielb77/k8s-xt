@@ -10,10 +10,10 @@ import (
 func gbecho(w http.ResponseWriter, req *http.Request) {
 	for k, v := range req.Header {
 		fmt.Printf("k: %v - v: %v", k, v)
-		log.Println("Hello world!")
+		log.Println(w, "Hello world!")
 	}
-	log.Println("Hello world! 2")
-	fmt.Println("Hola 2")
+	log.Println(w, "Hello world! 2")
+	fmt.Println(w, "Hola 2")
 }
 
 func hello(w http.ResponseWriter, req *http.Request) {
