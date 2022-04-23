@@ -21,6 +21,7 @@ COPY . .
 RUN go get github.com/gin-gonic/gin
 RUN go build -o ${BINNAME} main.go
 
+RUN du -hs *
 
 FROM scratch
 ARG BINNAME
