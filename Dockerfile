@@ -19,6 +19,7 @@ COPY . .
 #RUN go env
 #RUN go get github.com/gorilla/mux
 RUN go get github.com/gin-gonic/gin
+RUN go get k8s.io/api/admission/v1
 RUN go build -o ${BINNAME} main.go
 
 RUN du -hs *
